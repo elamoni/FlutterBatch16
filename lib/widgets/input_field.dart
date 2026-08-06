@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/core/color.dart';
 
 
 class InputField extends StatefulWidget {
@@ -43,6 +44,14 @@ class _InputFieldState extends State<InputField> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primary, // Green
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+
 
 
       ),

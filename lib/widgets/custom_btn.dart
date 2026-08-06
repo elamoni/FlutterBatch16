@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/core/color.dart';
 
 class CustomBtn extends StatefulWidget {
   final String? title;
@@ -22,7 +23,7 @@ class _CustomBtnState extends State<CustomBtn> {
         height: 40,width: double.infinity,
         child: FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF1CB86E), // Green color from UI
+              backgroundColor: AppColors.customBTN, // Green color from UI
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),

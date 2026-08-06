@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/screens/sign_up_screen.dart';
 import 'package:task_manager/widgets/screen_BG.dart';
 
+import '../controller/auth_controller.dart';
 import '../core/typography.dart';
+import '../data/model/api_response.dart';
+import '../data/model/user_model.dart';
+import '../data/services/api_caller.dart';
+import '../util/urls.dart';
 import '../widgets/appRichTextLink.dart';
 import '../widgets/custom_btn.dart';
 import '../widgets/input_field.dart';
@@ -17,9 +22,34 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  onTapSignUp(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
+  }
+  Future<void>login() async {
+    final ApiResponse response =await ApiCaller.postRequest(URL: TMUrls.LoginURL,
+        body: {
+          "email":_emailController.text,
+          "password":_passwordController.text
+        }
+    );
+
+    if(response.isSuccess){
+      UserModel model = UserModel.fromJson(response.responseData['data']);
+      String token = response.responseData['token'];
+
+      AuthController.saveUserData(model, token);
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainNavScreen()));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('login success.....!')));
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Something wrong..!')));
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +89,13 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),CustomBtn(
             onPressed: () {
+
+              if (_formKey.currentState!.validate()) {
+                login();
+              }
+
+            }
+              /*
               if (_formKey.currentState!.validate()) {
                 Navigator.pushReplacement(
                   context,
@@ -67,21 +104,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
               }
-            },
+            },*/
           ),
 
 
           AppRichTextLink(
             text: "Don't have account?",
             linkText: "Sign up",
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUpScreen(),
-                ),
-              );
-            }
+            onTap: onTapSignUp,
 
           )
         ],
