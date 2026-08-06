@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/screens/pin_varification_screen.dart';
 import 'package:task_manager/widgets/screen_BG.dart';
 
 import '../core/typography.dart';
 import '../widgets/appRichTextLink.dart';
 import '../widgets/custom_btn.dart';
 import '../widgets/input_field.dart';
-import 'home_screen.dart';
+import 'login_screen.dart';
+
 class Email_Screen extends StatefulWidget {
   const Email_Screen({super.key});
 
@@ -48,15 +50,20 @@ class _Email_ScreenState extends State<Email_Screen> {
 
                 CustomBtn(onPressed: () { Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 ); },),
 
                 AppRichTextLink(
                   text: "Have account?",
                   linkText: "Sign In",
-                  onTap: () {
-                    // Navigate to Sign up
+                  onTap: () {Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PinVerificationScreen(),
+                    ),
+                  );
                   },
+
                 ),
               ],
             ),)

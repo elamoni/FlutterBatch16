@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/color.dart';
 import '../data/model/task_model.dart';
 import '../data/services/api_caller.dart';
 import '../util/urls.dart';
@@ -29,13 +30,9 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.responseData['data'])));
 
     }
-
     taskList = temList;
-
     setState(() {
-
     });
-
   }
 
   @override
@@ -51,7 +48,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
       body: ListView.builder(
         itemCount: taskList.length,
         itemBuilder: (context, index) {
-          return TaskCard(taskModel:taskList[index], cardColor: Colors.blue, refreshParent: () {
+          return TaskCard(taskModel:taskList[index], cardColor: AppColors.customBTN, refreshParent: () {
             getAllTask();
           },
           );

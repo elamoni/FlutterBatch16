@@ -34,10 +34,12 @@ class _MainNavScreenState extends State<MainNavScreen> {
           children: [
             CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN3fMD9X1_p5b6lRSCGcpDtH9BcgEOsEZLg&s'),
+              backgroundImage:  const AssetImage('assets/Esmot.jpg'),
+            
             ),
             SizedBox(width: 10,),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Esmot Ara',style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Colors.white,
@@ -59,29 +61,55 @@ class _MainNavScreenState extends State<MainNavScreen> {
           )
         ],
       ),
-
-
-
-
-
       body: screens[selectedIndex ],
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
 
-          selectedIndex: selectedIndex,
-          onDestinationSelected: (int index){
-            selectedIndex =  index;
-            setState(() {
 
-            });
+          indicatorColor: Colors.green,
+          indicatorShape: const RoundedRectangleBorder(),
+          iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+                (states) {
+              if (states.contains(WidgetState.selected)) {
+                return const IconThemeData(color: Colors.black);
+              }
+              return const IconThemeData(color: Colors.green);
+            },
+          ),
+
+
+
+
+        labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+              (states) {
+            if (states.contains(WidgetState.selected)) {
+              return const TextStyle(color: Colors.black);
+            }
+            return const TextStyle(color: Colors.green);
           },
+        ),
+      ),
+
+      child: NavigationBar(
+        //height: 160,
+            selectedIndex: selectedIndex,
+            onDestinationSelected: (int index){
+              selectedIndex =  index;
+              setState(() {
+        
+              });
+            },
+        
+            destinations: [
+          NavigationDestination(icon: Icon(Icons.task), label: 'New'),
+          NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
+          NavigationDestination(icon: Icon(Icons.task_alt_outlined), label:'Completed'),
+          NavigationDestination(icon: Icon(Icons.cancel_outlined), label: 'Cancel'),
+            ],),
+      ),
 
 
-          destinations: [
-        NavigationDestination(icon: Icon(Icons.task), label: 'New'),
-        NavigationDestination(icon: Icon(Icons.refresh), label: 'Progress'),
-        NavigationDestination(icon: Icon(Icons.task_alt_outlined), label:'Completed'),
-        NavigationDestination(icon: Icon(Icons.cancel_outlined), label: 'Cancel'),
-          ],),
+
       floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateTaskScreen()));
 

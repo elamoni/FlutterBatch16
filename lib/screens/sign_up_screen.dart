@@ -69,13 +69,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               children: [
                 SizedBox(height: 20,),
-                InputField(controller: _emailController, hintText: 'Mail',),
+                InputField(controller: _emailController, hintText: 'E-Mail',),
                 SizedBox(height: 20,),
-                InputField(controller: _firstNameController, hintText: 'Password',),
+                InputField(controller: _firstNameController, hintText: 'First Name'),
                 SizedBox(height: 20,),
-                InputField(controller: _lastNameController, hintText: 'Mail',),
+                InputField(controller: _lastNameController, hintText: 'Last Name',),
                 SizedBox(height: 20,),
-                InputField(controller: _mobileController, hintText: 'Mail',),
+                InputField(controller: _mobileController, hintText: 'Mobile',),
                 SizedBox(height: 20,),
 
                 InputField(controller: _passwordController, hintText: 'Password',),

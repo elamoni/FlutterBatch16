@@ -49,20 +49,15 @@ class _ProgressScreenState extends State<ProgressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return TaskCard(
-            taskModel: TaskModel(
-              title: 'Task $index',
-              description: 'This is task description',
-              status: 'Progress',
-              createdDate: '2026-08-05',
-            ),
-            cardColor: Colors.purple,
-            refreshParent: () {},
-          );
-        },
-      ),
+
+          itemCount:taskList.length ,
+          itemBuilder: (context,index){
+            return   TaskCard(taskModel:taskList[index], cardColor: Colors.blue, refreshParent: () {
+              getAllTask();
+            },
+
+            );
+          })
     );
   }
 }

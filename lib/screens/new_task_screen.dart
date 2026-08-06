@@ -84,7 +84,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               scrollDirection: Axis.horizontal,
                 itemCount: taskCountList.length,
                 itemBuilder: (context, index){
-              return SizedBox(width: 80,
+              return SizedBox(width: 120,
                   child: TaskCountByStatus(title: taskCountList[index].sId.toString(),
                     count: taskCountList[index].sum ?? 0,
 
